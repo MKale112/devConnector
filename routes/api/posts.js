@@ -189,7 +189,7 @@ router.post(
   }
 );
 
-//                                  we need both ids
+//                                  we need both IDs
 // @route   DELETE api/posts/comment/:id/:comment_id
 // @desc    Delete comment on a post
 // @access  Private

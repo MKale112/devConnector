@@ -51,7 +51,7 @@ router.post(
         d: "mm",
       });
 
-      // we make a ** new ** user
+      // we make a new user
       user = new User({
         name,
         email,
@@ -60,15 +60,17 @@ router.post(
       });
 
       // 3) Encrypt the password
-      const salt = await bcrypt.genSalt(10);
+      const salt = await bcrypt.genSalt(10); // salt rounds
       user.password = await bcrypt.hash(password, salt);
+
+      // save the user in the DB
       await user.save();
 
       // 4) return json-web-token
       // we make payload a new object
       const payload = {
         user: {
-          // user.id is the id of the user object which mongoose automatically assigns when we make a new document in the db
+          // user.id is the id of the user object mongoose automatically assigns when we make a new document in the db
           id: user.id,
         },
       };
@@ -85,6 +87,7 @@ router.post(
           if (err) {
             throw err;
           }
+          // returning the token
           res.json({ token });
         }
       );

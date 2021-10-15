@@ -9,6 +9,7 @@ import {
   ACCOUNT_DELETED,
 } from "../actions/types";
 
+// +++++ AUTH STATE +++++
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
@@ -18,6 +19,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   const { type, payload } = action;
+
   switch (type) {
     case USER_LOADED:
       return { ...state, isAuthenticated: true, loading: false, user: payload };
